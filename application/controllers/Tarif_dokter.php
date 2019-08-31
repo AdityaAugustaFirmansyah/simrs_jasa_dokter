@@ -37,8 +37,8 @@ class Tarif_dokter extends CI_Controller{
 				'perawatan' => $this->input->post('perawatan'),
             );
             
-            $tarif_dokter_id = $this->Tarif_dokter_model->add_tarif_dokter($params);
-            redirect('tarif_dokter/index');
+            $tarif_dokter_id = $this->Tarif_dokter_model->transaction($params);
+            // redirect('tarif_dokter/index');
         }
         else
         {            
@@ -105,6 +105,6 @@ class Tarif_dokter extends CI_Controller{
     }
     public function countColumn()
     {
-        echo $this->Tarif_dokter_model->countColumn();
+        return $this->Tarif_dokter_model->countColumn();
     }
 }

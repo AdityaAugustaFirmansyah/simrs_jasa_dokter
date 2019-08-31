@@ -57,4 +57,17 @@ class Tarif_dokter_model extends CI_Model
     {
         return $this->db->count_all('tarif_dokter');
     }
+
+    public function transaction($params)
+    {
+        $this->db->trans_start();
+        $this->add_tarif_dokter($params);   
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status()=== false) {
+            echo "rollback";
+        }else{
+            echo "commited";
+        }
+    }
 }
