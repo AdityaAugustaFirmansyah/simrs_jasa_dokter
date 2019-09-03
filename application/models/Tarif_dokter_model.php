@@ -66,8 +66,34 @@ class Tarif_dokter_model extends CI_Model
 
         if ($this->db->trans_status()=== false) {
             echo "rollback";
-        }else{
-            echo "commited";
+        }else{  
+            redirect(base_url('tarif_dokter/index'));
+        }
+    }
+
+    public function transactionUpdate($kd_tarif_dokter,$params)
+    {
+        $this->db->trans_start();
+        $this->update_tarif_dokter($kd_tarif_dokter,$params);   
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status()=== false) {
+            echo "rollback";
+        }else{  
+            redirect(base_url('tarif_dokter/index'));
+        }
+    }
+
+    public function transactionDelete($kd_tarif_dokter)
+    {
+        $this->db->trans_start();
+        $this->delete_tarif_dokter($params);   
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status()=== false) {
+            echo "rollback";
+        }else{  
+            redirect(base_url('tarif_dokter/index'));
         }
     }
 }

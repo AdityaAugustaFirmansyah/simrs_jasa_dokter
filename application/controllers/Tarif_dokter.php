@@ -66,7 +66,7 @@ class Tarif_dokter extends CI_Controller{
 					'perawatan' => $this->input->post('perawatan'),
                 );
 
-                $this->Tarif_dokter_model->update_tarif_dokter($kd_tarif_dokter,$params);            
+                $this->Tarif_dokter_model->transactionUpdate($kd_tarif_dokter,$params);            
                 redirect('tarif_dokter/index');
             }
             else
@@ -89,7 +89,7 @@ class Tarif_dokter extends CI_Controller{
         // check if the tarif_dokter exists before trying to delete it
         if(isset($tarif_dokter['kd_tarif_dokter']))
         {
-            $this->Tarif_dokter_model->delete_tarif_dokter($kd_tarif_dokter);
+            $this->Tarif_dokter_model->transactionDelete($kd_tarif_dokter);
             redirect('tarif_dokter/index');
         }
         else
@@ -105,6 +105,6 @@ class Tarif_dokter extends CI_Controller{
     }
     public function countColumn()
     {
-        return $this->Tarif_dokter_model->countColumn();
+        return $this->Tarif_dokter_model->countColumn()+1;
     }
 }
